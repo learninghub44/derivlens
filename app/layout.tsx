@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { DerivSessionProvider } from "@/lib/deriv/session-context";
 import { getSiteConfig } from "@/config/site";
 import "./globals.css";
 
@@ -31,7 +32,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${display.variable} ${body.variable} ${mono.variable} font-body`}>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <DerivSessionProvider>{children}</DerivSessionProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

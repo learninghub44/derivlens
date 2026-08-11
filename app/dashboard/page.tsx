@@ -1,14 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import { AppShell } from "@/components/layout/app-shell";
 import { Card, StatCard } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
+import { useDerivSession } from "@/lib/deriv/session-context";
 import { cn } from "@/lib/utils";
 import { PlugZap } from "lucide-react";
 
 export default function DashboardPage() {
-  // No Deriv account is wired up yet in this scaffold — every figure
-  // below is a genuine empty state, not a placeholder number.
-  const connected = false;
+  const { state, account, error } = useDerivSession();
+  const connected = state === "open" && account !== null;
 
   return (
     <AppShell title="Dashboard">
@@ -20,16 +22,20 @@ export default function DashboardPage() {
             Connect your Deriv account to start live analysis. Balance, open contracts and
             today&apos;s performance will appear here once you do.
           </p>
+          {error && <p className="max-w-sm text-sm text-danger">{error}</p>}
           <Link href="/connect" className={cn(buttonVariants(), "mt-2")}>
             Connect Deriv
           </Link>
         </Card>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <StatCard label="Balance" value="—" />
-          <StatCard label="Market" value="—" />
-          <StatCard label="Current digit" value="—" />
-          <StatCard label="Signal status" value="—" />
+          <StatCard
+            label="Balance"
+            value={`${account!.currency} ${account!.balance?.toFixed(2) ?? "—"}`}
+          />
+          <StatCard label="Account" value={account!.loginid} hint={account!.isVirtual ? "Demo" : "Real"} />
+          <StatCard label="Market" value="—" hint="Select a market in the analyzer" />
+          <StatCard label="Signal status" value="NO TRADE" hint="No market selected yet" />
         </div>
       )}
     </AppShell>
