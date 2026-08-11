@@ -14,6 +14,7 @@ const config: Config = {
         "signal-dim": "rgb(var(--signal-dim) / <alpha-value>)",
         amber: "rgb(var(--amber) / <alpha-value>)",
         danger: "rgb(var(--danger) / <alpha-value>)",
+        success: "rgb(var(--success) / <alpha-value>)",
         "text-primary": "rgb(var(--text-primary) / <alpha-value>)",
         "text-muted": "rgb(var(--text-muted) / <alpha-value>)",
       },
