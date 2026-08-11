@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --ink: 247 248 250;
+  --surface: 255 255 255;
+  --surface-raised: 255 255 255;
+  --line: 226 229 234;
+  --signal: 14 165 122;
+  --signal-dim: 209 236 226;
+  --amber: 180 106 8;
+  --danger: 200 47 38;
+  --text-primary: 20 23 28;
+  --text-muted: 91 98 112;
+}
+
+.dark {
+  --ink: 10 12 15;
+  --surface: 18 21 26;
+  --surface-raised: 25 29 36;
+  --line: 38 43 51;
+  --signal: 53 224 166;
+  --signal-dim: 31 143 108;
+  --amber: 245 166 35;
+  --danger: 240 85 75;
+  --text-primary: 231 234 238;
+  --text-muted: 139 147 161;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  background-color: rgb(var(--ink));
+  color: rgb(var(--text-primary));
+  font-feature-settings: "tnum" 1, "cv11" 1;
+}
+
+.font-tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: rgb(var(--signal) / 0.25);
+}
